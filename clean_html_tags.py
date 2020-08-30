@@ -18,10 +18,11 @@ class MyHTMLParser(HTMLParser):
 	data = ""
 	title = ""
 	def handle_starttag(self, tag, attrs):
-		if len(attrs) == 3 and "title" in attrs[-1]:
-			self.title = attrs[-1][-1]
-		if len(attrs) == 3 and "title" not in attrs[-1]:
-			raise AttributeError("title not found")
+		if tag == "doc":
+			if len(attrs) == 3 and "title" in attrs[-1]:
+				self.title = attrs[-1][-1]
+			if len(attrs) == 3 and "title" not in attrs[-1]:
+				raise AttributeError("title not found")
 
 	def handle_endtag(self, tag):
 		pass
