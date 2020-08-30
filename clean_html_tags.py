@@ -1,10 +1,6 @@
-import sys, time
 import glob
 import argparse
-import itertools
-from re import search
 from os import path, walk, sep, makedirs
-from itertools import chain
 from html.parser import HTMLParser
 from tqdm import tqdm
 
@@ -91,5 +87,3 @@ if __name__ == '__main__':
 			file = open("cleaned_data_sets/"+fileName,"w",encoding="utf-8")
 			file.write(parser.con_data)
 			file.close()
-
-			#sys.stdout.write(str(files.index(fileN)+1)+"/"+str(filesCount)+" File Cleaned and Saved to cleaned_data_sets/ Directory")
