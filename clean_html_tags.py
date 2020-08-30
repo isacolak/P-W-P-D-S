@@ -82,3 +82,5 @@ if __name__ == '__main__':
 			file = open("cleaned_data_sets/"+fileName,"w",encoding="utf-8")
 			file.write(parser.con_data)
 			file.close()
+
+			print(fileName+"Cleared And Saved In cleaned_data_sets/ Directory")
