@@ -29,7 +29,7 @@ class MyHTMLParser(HTMLParser):
 	def handle_data(self, data):
 		self.data = data
 
-		if "MediaWiki:" not in self.title and "Dosya:" not in self.title and "Yardım:" not in self.title and "File:" not in self.title and "Help:" not in self.title and "Vikipedi" not in self.title:
+		if "MediaWiki:" not in self.title and "Dosya:" not in self.title and "Yardım:" not in self.title and "File:" not in self.title and "Help:" not in self.title and "Vikipedi:" not in self.title:
 			self.con_data += data
 
 if __name__ == '__main__':
