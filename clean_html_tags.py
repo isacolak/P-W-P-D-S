@@ -1,9 +1,12 @@
+import sys, time
 import glob
 import argparse
+import itertools
 from re import search
 from os import path, walk, sep, makedirs
 from itertools import chain
 from html.parser import HTMLParser
+from tqdm import tqdm
 
 def glob_or_com(s):
 	retval = glob.glob(s)
@@ -47,6 +50,8 @@ if __name__ == '__main__':
 
 	files = []
 
+	files_count = 0
+
 	for i in f_d:
 		if path.isdir(i):
 			for dirpath, dirnames, filenames in walk(i):
@@ -55,9 +60,12 @@ if __name__ == '__main__':
 			files.append(i)
 
 	if len(files) > 0:
-		for fileName in files:
 
-			fileName = fileName.replace(sep, "/")
+		filesCount = len(files)
+
+		for fileN in tqdm(files,desc="Cleaned and Saved Files",bar_format="{desc}: {n_fmt}/{total_fmt} | [time left: {remaining}]"):
+
+			fileName = fileN.replace(sep, "/")
 			fileDirName = path.dirname(fileName)
 
 			file = open(fileName,"r",encoding="utf-8")
@@ -84,4 +92,4 @@ if __name__ == '__main__':
 			file.write(parser.con_data)
 			file.close()
 
-			print(fileName+" Cleared And Saved In cleaned_data_sets/ Directory")
+			#sys.stdout.write(str(files.index(fileN)+1)+"/"+str(filesCount)+" File Cleaned and Saved to cleaned_data_sets/ Directory")
