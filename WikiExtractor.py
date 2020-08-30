@@ -57,7 +57,7 @@ import os.path
 import re  # TODO use regex when it will be standard
 import time
 import urllib
-from io import StringIO
+from cStringIO import StringIO
 from htmlentitydefs import name2codepoint
 from itertools import izip, izip_longest
 from multiprocessing import Queue, Process, Value, cpu_count
