@@ -1,7 +1,7 @@
 import glob
 import argparse
 from re import search
-from os import path, walk, mkdir
+from os import path, walk, sep, makedirs
 from itertools import chain
 from html.parser import HTMLParser
 
@@ -56,6 +56,9 @@ if __name__ == '__main__':
 	if len(files) > 0:
 		for fileName in files:
 
+			fileName = fileName.replace(sep, "/")
+			fileDirName = path.dirname(fileName)
+
 			file = open(fileName,"r",encoding="utf-8")
 
 			file_read = file.read()
@@ -65,10 +68,16 @@ if __name__ == '__main__':
 			parser = MyHTMLParser()
 			parser.feed(file_read)
 
-			if path.exists("./cleaned_data_sets/"):
-				pass
+			if path.exists("cleaned_data_sets/"):
+				if fileDirName != "":
+					if path.exists("cleaned_data_sets/"+fileDirName):
+						pass
+					else:
+						makedirs("cleaned_data_sets/"+fileDirName)
 			else:
-				mkdir("./cleaned_data_sets/")
+				makedirs("cleaned_data_sets/")
+				if fileDirName != "":
+					makedirs("cleaned_data_sets/"+fileDirName)
 
 			file = open("cleaned_data_sets/"+fileName,"w",encoding="utf-8")
 			file.write(parser.con_data)
